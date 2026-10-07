@@ -1,1688 +1,2555 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cây Cảnh Xanh | Vườn Xinh Premium</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-<style>
-  /* ========== RESET ========== */
-  *, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  :root {
-    --green-900: #0d2818;
-    --green-800: #16412b;
-    --green-700: #1f5c3d;
-    --green-600: #2a7a52;
-    --green-500: #3ba368;
-    --green-400: #5cc286;
-    --green-300: #a8e6c1;
-    --green-100: #e6f7ed;
-    --accent: #c8f542;
-    --accent-dark: #a3d400;
-    --cream: #f7faf5;
-    --dark: #0a1f12;
-    --shadow-sm: 0 4px 12px rgba(13, 40, 24, 0.08);
-    --shadow-md: 0 12px 32px rgba(13, 40, 24, 0.12);
-    --shadow-lg: 0 24px 60px rgba(13, 40, 24, 0.18);
-    --shadow-glow: 0 0 40px rgba(92, 194, 134, 0.4);
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--cream);
-    color: var(--dark);
-    line-height: 1.6;
-    overflow-x: hidden;
-    position: relative;
-  }
-
-  /* Animated background blobs */
-  body::before,
-  body::after {
-    content: '';
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(120px);
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.5;
-  }
-
-  body::before {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, var(--green-300), transparent 70%);
-    top: -200px;
-    left: -200px;
-    animation: float1 18s ease-in-out infinite;
-  }
-
-  body::after {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, #d4f0c0, transparent 70%);
-    bottom: -250px;
-    right: -250px;
-    animation: float2 20s ease-in-out infinite;
-  }
-
-  @keyframes float1 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(80px, 60px) scale(1.1); }
-  }
-  @keyframes float2 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(-100px, -50px) scale(1.15); }
-  }
-
-  .container {
-    max-width: 1350px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ========== HEADER ========== */
-  header {
-    position: sticky;
-    top: 16px;
-    z-index: 1000;
-    margin: 16px auto 0;
-    max-width: 1350px;
-    padding: 0 24px;
-  }
-
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 28px;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 100px;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s ease;
-  }
-
-  .header-inner:hover {
-    box-shadow: var(--shadow-md);
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .logo-icon {
-    width: 48px;
-    height: 48px;
-    background: linear-gradient(135deg, var(--green-600), var(--green-800));
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--accent);
-    font-size: 1.4rem;
-    box-shadow: 0 8px 20px rgba(42, 122, 82, 0.35);
-    transform: rotate(-5deg);
-    transition: transform 0.3s ease;
-  }
-
-  .logo:hover .logo-icon {
-    transform: rotate(5deg) scale(1.05);
-  }
-
-  .logo-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--green-900);
-    letter-spacing: -0.5px;
-    line-height: 1;
-  }
-
-  .logo-text span {
-    display: block;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 3px;
-    color: var(--green-500);
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
-
-  .nav {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-  }
-
-  .nav a {
-    text-decoration: none;
-    color: var(--green-800);
-    font-weight: 500;
-    font-size: 0.95rem;
-    padding: 10px 18px;
-    border-radius: 100px;
-    transition: all 0.25s ease;
-    position: relative;
-  }
-
-  .nav a:not(.cart-icon):hover {
-    background: var(--green-100);
-    color: var(--green-700);
-  }
-
-  .cart-icon {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: linear-gradient(135deg, var(--green-800), var(--green-900));
-    color: white !important;
-    padding: 10px 22px !important;
-    border-radius: 100px;
-    font-weight: 600;
-    box-shadow: 0 8px 20px rgba(13, 40, 24, 0.25);
-    transition: all 0.3s ease;
-    position: relative;
-  }
-
-  .cart-icon:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(13, 40, 24, 0.35);
-  }
-
-  .cart-badge {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    background: var(--accent);
-    color: var(--green-900);
-    font-size: 0.7rem;
-    font-weight: 800;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid white;
-  }
-
-  /* ========== HERO ========== */
-  .hero {
-    padding: 80px 0 100px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: center;
-    gap: 60px;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--green-300);
-    padding: 8px 18px;
-    border-radius: 100px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--green-700);
-    margin-bottom: 24px;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .hero-badge i {
-    color: var(--accent-dark);
-  }
-
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 5vw, 4.2rem);
-    font-weight: 800;
-    line-height: 1.05;
-    color: var(--green-900);
-    letter-spacing: -2px;
-    margin-bottom: 24px;
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    background: linear-gradient(120deg, var(--green-600), var(--accent-dark));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    position: relative;
-  }
-
-  .hero p {
-    font-size: 1.1rem;
-    color: #4a5e50;
-    margin-bottom: 36px;
-    max-width: 520px;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(135deg, var(--green-700), var(--green-900));
-    color: white;
-    font-weight: 600;
-    padding: 16px 34px;
-    border-radius: 100px;
-    text-decoration: none;
-    font-size: 1rem;
-    box-shadow: 0 16px 32px rgba(13, 40, 24, 0.3);
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    border: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-primary::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 24px 48px rgba(13, 40, 24, 0.4);
-  }
-
-  .btn-primary:hover::after {
-    opacity: 0.15;
-  }
-
-  .btn-primary span,
-  .btn-primary i {
-    position: relative;
-    z-index: 1;
-  }
-
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: transparent;
-    color: var(--green-800);
-    font-weight: 600;
-    padding: 16px 26px;
-    border-radius: 100px;
-    text-decoration: none;
-    font-size: 1rem;
-    border: 2px solid var(--green-300);
-    transition: all 0.25s ease;
-    cursor: pointer;
-  }
-
-  .btn-ghost:hover {
-    background: var(--green-100);
-    border-color: var(--green-500);
-    transform: translateY(-2px);
-  }
-
-  /* Hero Visual */
-  .hero-visual {
-    position: relative;
-    height: 520px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .hero-circle {
-    position: absolute;
-    width: 460px;
-    height: 460px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--green-100), var(--green-300));
-    box-shadow: var(--shadow-lg);
-  }
-
-  .hero-circle::before {
-    content: '';
-    position: absolute;
-    inset: 20px;
-    border-radius: 50%;
-    border: 2px dashed rgba(42, 122, 82, 0.3);
-    animation: spinSlow 30s linear infinite;
-  }
-
-  @keyframes spinSlow {
-    to { transform: rotate(360deg); }
-  }
-
-  .hero-img-main {
-    position: relative;
-    z-index: 2;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--green-600), var(--green-800));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12rem;
-    color: var(--accent);
-    box-shadow: var(--shadow-lg), var(--shadow-glow);
-    animation: floatHero 6s ease-in-out infinite;
-  }
-
-  @keyframes floatHero {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-  }
-
-  /* Floating cards */
-  .float-card {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(20px);
-    padding: 14px 20px;
-    border-radius: 20px;
-    box-shadow: var(--shadow-md);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    animation: floatCard 5s ease-in-out infinite;
-    z-index: 3;
-  }
-
-  .float-card i {
-    font-size: 1.4rem;
-    color: var(--green-600);
-    width: 42px;
-    height: 42px;
-    background: var(--green-100);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .float-card-text strong {
-    display: block;
-    font-size: 0.95rem;
-    color: var(--green-900);
-    font-weight: 700;
-  }
-
-  .float-card-text span {
-    font-size: 0.78rem;
-    color: #6b7f70;
-  }
-
-  .float-card-1 {
-    top: 40px;
-    left: -10px;
-    animation-delay: 0s;
-  }
-
-  .float-card-2 {
-    bottom: 60px;
-    right: -20px;
-    animation-delay: 1.5s;
-  }
-
-  .float-card-3 {
-    top: 50%;
-    right: -30px;
-    animation-delay: 0.8s;
-  }
-
-  @keyframes floatCard {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-  }
-
-  /* ========== MARQUEE ========== */
-  .marquee {
-    background: var(--green-900);
-    color: white;
-    padding: 20px 0;
-    overflow: hidden;
-    margin: 40px 0;
-    transform: rotate(-1deg);
-    border-top: 2px solid var(--accent);
-    border-bottom: 2px solid var(--accent);
-  }
-
-  .marquee-track {
-    display: flex;
-    gap: 60px;
-    animation: scroll 30s linear infinite;
-    white-space: nowrap;
-  }
-
-  .marquee-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: white;
-  }
-
-  .marquee-item i {
-    color: var(--accent);
-    font-size: 1.2rem;
-  }
-
-  @keyframes scroll {
-    to { transform: translateX(-50%); }
-  }
-
-  /* ========== SECTION HEADERS ========== */
-  .section-header {
-    text-align: center;
-    margin: 80px 0 50px;
-  }
-
-  .section-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--green-600);
-    margin-bottom: 16px;
-  }
-
-  .section-eyebrow::before,
-  .section-eyebrow::after {
-    content: '';
-    width: 30px;
-    height: 2px;
-    background: var(--green-500);
-    border-radius: 2px;
-  }
-
-  .section-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    color: var(--green-900);
-    letter-spacing: -1px;
-    line-height: 1.1;
-    margin-bottom: 14px;
-  }
-
-  .section-header h2 em {
-    font-style: italic;
-    color: var(--green-600);
-  }
-
-  .section-header p {
-    color: #5a6e60;
-    font-size: 1.05rem;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  /* ========== PRODUCT GRID ========== */
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-    gap: 28px;
-    margin-bottom: 80px;
-  }
-
-  .product-card {
-    background: white;
-    border-radius: 28px;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    border: 1px solid rgba(168, 230, 193, 0.5);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .product-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 60%, rgba(200, 245, 66, 0.15));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .product-card:hover {
-    transform: translateY(-12px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--green-400);
-  }
-
-  .product-card:hover::before {
-    opacity: 1;
-  }
-
-  .product-img {
-    height: 260px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--green-100), #d9f0e0);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .product-img::after {
-    content: '';
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,255,255,0.8), transparent 70%);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 0;
-  }
-
-  .product-img i {
-    font-size: 7rem;
-    color: var(--green-700);
-    position: relative;
-    z-index: 1;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    filter: drop-shadow(0 12px 20px rgba(13, 40, 24, 0.15));
-  }
-
-  .product-card:hover .product-img i {
-    transform: scale(1.15) rotate(-5deg);
-    color: var(--green-600);
-  }
-
-  .badge {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-    color: var(--green-900);
-    font-weight: 800;
-    font-size: 0.7rem;
-    padding: 6px 14px;
-    border-radius: 100px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    box-shadow: 0 6px 16px rgba(163, 212, 0, 0.4);
-    z-index: 2;
-  }
-
-  .badge.hot {
-    background: linear-gradient(135deg, #ff6b6b, #ee5253);
-    color: white;
-    box-shadow: 0 6px 16px rgba(238, 82, 83, 0.4);
-  }
-
-  .badge.new {
-    background: linear-gradient(135deg, var(--green-500), var(--green-700));
-    color: white;
-    box-shadow: 0 6px 16px rgba(42, 122, 82, 0.4);
-  }
-
-  .wishlist-btn {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: var(--green-700);
-    font-size: 1rem;
-    transition: all 0.25s ease;
-    z-index: 2;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .wishlist-btn:hover {
-    background: #ffe0e0;
-    color: #ee5253;
-    transform: scale(1.1);
-  }
-
-  .product-info {
-    padding: 22px 22px 24px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    position: relative;
-    z-index: 2;
-    background: white;
-  }
-
-  .product-category {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--green-500);
-    margin-bottom: 8px;
-  }
-
-  .product-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--green-900);
-    margin-bottom: 10px;
-    line-height: 1.25;
-    letter-spacing: -0.3px;
-  }
-
-  .product-desc {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    color: #6b7f70;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-  }
-
-  .product-desc span {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--green-100);
-    padding: 4px 10px;
-    border-radius: 100px;
-    font-weight: 500;
-    color: var(--green-700);
-  }
-
-  .product-desc i {
-    font-size: 0.75rem;
-  }
-
-  .rating {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 16px;
-    font-size: 0.85rem;
-  }
-
-  .rating .stars {
-    color: #ffb800;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-  }
-
-  .rating span {
-    color: #8a9a90;
-    font-weight: 500;
-  }
-
-  .price-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: auto;
-    padding-top: 16px;
-    border-top: 1px dashed var(--green-300);
-  }
-
-  .price-wrap .price {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--green-900);
-    line-height: 1;
-  }
-
-  .price-wrap .price small {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--green-600);
-  }
-
-  .price-wrap .price-old {
-    font-size: 0.85rem;
-    color: #a8b3ac;
-    text-decoration: line-through;
-    margin-left: 6px;
-    font-weight: 500;
-  }
-
-  .btn-add {
-    width: 46px;
-    height: 46px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, var(--green-700), var(--green-900));
-    border: none;
-    color: white;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 8px 20px rgba(13, 40, 24, 0.25);
-    flex-shrink: 0;
-  }
-
-  .btn-add:hover {
-    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-    color: var(--green-900);
-    transform: scale(1.1) rotate(90deg);
-    box-shadow: 0 12px 24px rgba(163, 212, 0, 0.5);
-  }
-
-  /* ========== FEATURES ========== */
-  .features-section {
-    background: linear-gradient(135deg, var(--green-900), var(--green-800));
-    border-radius: 40px;
-    padding: 60px 40px;
-    margin: 60px 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .features-section::before {
-    content: '';
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200, 245, 66, 0.15), transparent 70%);
-    top: -200px;
-    right: -100px;
-  }
-
-  .features-section::after {
-    content: '';
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(92, 194, 134, 0.2), transparent 70%);
-    bottom: -150px;
-    left: -50px;
-  }
-
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 30px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .feature-item {
-    text-align: center;
-    padding: 20px;
-    border-radius: 24px;
-    transition: all 0.3s ease;
-  }
-
-  .feature-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .feature-icon {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 20px;
-    background: rgba(200, 245, 66, 0.15);
-    border: 2px solid rgba(200, 245, 66, 0.4);
-    border-radius: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    color: var(--accent);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .feature-item:hover .feature-icon {
-    transform: translateY(-6px) rotate(-6deg);
-    background: var(--accent);
-    color: var(--green-900);
-  }
-
-  .feature-item h4 {
-    color: white;
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  .feature-item p {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
-  }
-
-  /* ========== CTA BANNER ========== */
-  .cta-banner {
-    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-    border-radius: 40px;
-    padding: 50px;
-    margin: 80px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-    flex-wrap: wrap;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-banner::before {
-    content: '\f4d8';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    font-size: 20rem;
-    color: rgba(13, 40, 24, 0.08);
-    right: -40px;
-    top: 50%;
-    transform: translateY(-50%) rotate(-15deg);
-  }
-
-  .cta-content {
-    position: relative;
-    z-index: 1;
-  }
-
-  .cta-content h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    font-weight: 800;
-    color: var(--green-900);
-    margin-bottom: 8px;
-    letter-spacing: -0.5px;
-  }
-
-  .cta-content p {
-    color: rgba(13, 40, 24, 0.7);
-    font-size: 1rem;
-    font-weight: 500;
-  }
-
-  .cta-banner .btn-primary {
-    background: var(--green-900);
-    position: relative;
-    z-index: 1;
-  }
-
-  .cta-banner .btn-primary:hover {
-    background: var(--green-800);
-  }
-
-  /* ========== FOOTER ========== */
-  footer {
-    background: var(--green-900);
-    color: rgba(255, 255, 255, 0.7);
-    padding: 70px 0 30px;
-    border-radius: 40px 40px 0 0;
-    margin-top: 60px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  footer::before {
-    content: '';
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(92, 194, 134, 0.15), transparent 70%);
-    top: -250px;
-    right: -100px;
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 50px;
-    margin-bottom: 50px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .footer-brand {
-    max-width: 320px;
-  }
-
-  .footer-brand .logo-text {
-    color: white;
-    margin-bottom: 20px;
-  }
-
-  .footer-brand p {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    margin-bottom: 24px;
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  .social-links {
-    display: flex;
-    gap: 12px;
-  }
-
-  .social-links a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.08);
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
-    color: white;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .social-links a:hover {
-    background: var(--accent);
-    color: var(--green-900);
-    transform: translateY(-4px);
-    border-color: var(--accent);
-  }
-
-  .footer-col h4 {
-    color: white;
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 22px;
-    letter-spacing: 0.5px;
-  }
-
-  .footer-col a,
-  .footer-col p {
-    display: block;
-    color: rgba(255, 255, 255, 0.6);
-    text-decoration: none;
-    font-size: 0.92rem;
-    line-height: 2.2;
-    transition: all 0.25s ease;
-  }
-
-  .footer-col a:hover {
-    color: var(--accent);
-    transform: translateX(4px);
-  }
-
-  .footer-col a i {
-    margin-right: 8px;
-    font-size: 0.75rem;
-    color: var(--accent);
-  }
-
-  .copyright {
-    text-align: center;
-    padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.88rem;
-    color: rgba(255, 255, 255, 0.45);
-    position: relative;
-    z-index: 1;
-  }
-
-  .copyright span {
-    color: var(--accent);
-    font-weight: 600;
-  }
-
-  /* ========== RESPONSIVE ========== */
-  @media (max-width: 1024px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nàng Thơ Beauty | Mỹ phẩm cao cấp</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ================= RESET & BASE ================= */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --rose-gold: #b76e79;
+      --rose-gold-light: #d99aa3;
+      --rose-gold-soft: #e8c5c9;
+      --gold: #c9a86a;
+      --cream: #fdfaf6;
+      --cream-2: #f7efe6;
+      --beige: #f2e6d9;
+      --ink: #2c2420;
+      --ink-soft: #5a4f48;
+      --text-muted: #8b7f76;
+      --white: #ffffff;
+      --shadow-soft: 0 10px 40px rgba(183, 110, 121, 0.08);
+      --shadow-hover: 0 25px 60px rgba(183, 110, 121, 0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--cream);
+      color: var(--ink);
+      line-height: 1.65;
+      overflow-x: hidden;
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(232, 197, 201, 0.35), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(221, 197, 154, 0.25), transparent 45%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ================= TYPOGRAPHY ================= */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+
+    body, p, a, span, div, li, button, input, textarea, label, select {
+      font-family: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ================= ANIMATIONS ================= */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    @keyframes rotate-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes pageFade {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes cartBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    .fade-up { animation: fadeUp 1s ease forwards; opacity: 0; }
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+
+    /* ================= TOP BAR ================= */
+    .top-bar {
+      background: linear-gradient(90deg, var(--beige), var(--rose-gold-soft), var(--beige));
+      color: var(--ink);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 12px 0;
       text-align: center;
-      gap: 40px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 101;
     }
 
-    .hero-badge,
-    .hero p {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-actions {
-      justify-content: center;
-    }
-
-    .hero-visual {
-      height: 400px;
-    }
-
-    .hero-circle {
-      width: 340px;
-      height: 340px;
-    }
-
-    .hero-img-main {
-      width: 300px;
-      height: 300px;
-      font-size: 9rem;
-    }
-
-    .footer-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-    }
-
-    .footer-brand {
-      max-width: 100%;
-      grid-column: span 2;
-    }
-  }
-
-  @media (max-width: 768px) {
+    /* ================= HEADER ================= */
     header {
-      top: 8px;
+      background: rgba(253, 250, 246, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 22px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(183, 110, 121, 0.12);
+      transition: all 0.4s;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--ink);
+      text-transform: uppercase;
+      position: relative;
+      line-height: 1;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .logo span {
+      color: var(--rose-gold);
+      font-style: italic;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: none;
+    }
+
+    .logo::after {
+      content: '';
+      display: block;
+      width: 34px;
+      height: 2px;
+      background: var(--rose-gold);
+      margin-top: 4px;
+      border-radius: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 45px;
+      list-style: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      color: var(--ink-soft);
+      transition: color 0.3s;
+      position: relative;
+      padding: 5px 0;
+      cursor: pointer;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--rose-gold);
+      transition: all 0.4s ease;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--rose-gold); }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    .nav-icons {
+      display: flex;
+      gap: 26px;
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+    }
+
+    .nav-icons i {
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .nav-icons i:hover {
+      color: var(--rose-gold);
+      transform: translateY(-2px);
+    }
+
+    .cart-icon { position: relative; }
+
+    .cart-icon::after {
+      content: attr(data-count);
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: var(--rose-gold);
+      color: var(--white);
+      font-size: 0.6rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      transition: all 0.3s;
+      padding: 0 4px;
+      min-width: 18px;
+    }
+
+    .cart-icon.bounce { animation: cartBounce 0.5s ease; }
+
+    /* ================= PAGE SYSTEM ================= */
+    .page {
+      display: none;
+      animation: pageFade 0.5s ease forwards;
+    }
+
+    .page.active { display: block; }
+
+    /* ================= HERO ================= */
+    .hero {
+      position: relative;
+      padding: 90px 0 110px;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 100%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -15%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(232, 197, 201, 0.5), transparent 70%);
+      pointer-events: none;
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '✦';
+      position: absolute;
+      top: 12%;
+      left: 5%;
+      font-size: 1.5rem;
+      color: var(--gold);
+      opacity: 0.6;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--rose-gold-soft);
+      color: var(--rose-gold);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 8px 20px;
+      letter-spacing: 3px;
+      margin-bottom: 32px;
+      text-transform: uppercase;
+      border-radius: 40px;
+    }
+
+    .badge::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--rose-gold);
+    }
+
+    .hero-content h1 {
+      font-size: 4.2rem;
+      line-height: 1.08;
+      margin-bottom: 28px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-content h1 em {
+      color: var(--rose-gold);
+      font-style: italic;
+      font-weight: 500;
+      display: inline-block;
+      position: relative;
+    }
+
+    .hero-content h1 em::after {
+      content: '';
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--rose-gold-light), transparent);
+      border-radius: 10px;
+    }
+
+    .hero-content p {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      max-width: 480px;
+      margin-bottom: 42px;
+      line-height: 1.85;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-luxury {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--rose-gold), #a05a65);
+      color: var(--white);
+      padding: 18px 42px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+      border-radius: 60px;
+      box-shadow: 0 12px 30px rgba(183, 110, 121, 0.25);
+    }
+
+    .btn-luxury::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      transition: left 0.6s;
+    }
+
+    .btn-luxury:hover::before { left: 100%; }
+
+    .btn-luxury:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 45px rgba(183, 110, 121, 0.4);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.6);
+      color: var(--ink);
+      padding: 18px 42px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border: 1px solid var(--rose-gold-light);
+      cursor: pointer;
+      transition: all 0.4s;
+      border-radius: 60px;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--rose-gold);
+      color: var(--rose-gold);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 50px;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(183, 110, 121, 0.18);
+    }
+
+    .stat-item h4 {
+      font-size: 2.6rem;
+      color: var(--rose-gold);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .stat-item p {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
       margin-top: 8px;
     }
 
-    .header-inner {
-      padding: 10px 18px;
-      border-radius: 24px;
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      width: 105%;
+      height: 105%;
+      border: 1px solid rgba(183, 110, 121, 0.25);
+      border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+      animation: rotate-slow 30s linear infinite;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+      overflow: hidden;
+      border: 6px solid var(--white);
+      box-shadow: 0 30px 80px rgba(183, 110, 121, 0.25);
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
+
+    .hero-float-tag {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--rose-gold-soft);
+      padding: 16px 22px;
+      z-index: 5;
+      animation: float 5s ease-in-out infinite;
+      border-radius: 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-float-tag.tag-1 { top: 15%; left: -30px; }
+    .hero-float-tag.tag-2 { bottom: 20%; right: -30px; animation-delay: 1s; }
+
+    .hero-float-tag .label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      margin-bottom: 4px;
+    }
+
+    .hero-float-tag .value {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--ink);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    /* ================= MARQUEE ================= */
+    .marquee {
+      background: linear-gradient(90deg, var(--rose-gold-soft), var(--beige), var(--rose-gold-soft));
+      color: var(--ink);
+      padding: 18px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      gap: 60px;
+      animation: marquee-scroll 30s linear infinite;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .marquee-track span { display: flex; align-items: center; gap: 60px; }
+    .marquee-track i { font-size: 0.85rem; color: var(--rose-gold); }
+
+    /* ================= SECTIONS ================= */
+    .section { padding: 110px 0; position: relative; z-index: 1; }
+    .section-title { text-align: center; margin-bottom: 70px; }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--rose-gold);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .section-eyebrow::before,
+    .section-eyebrow::after {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--rose-gold);
+    }
+
+    .section-title h2 {
+      font-size: 3.3rem;
+      margin-bottom: 16px;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    .section-title h2 em { color: var(--rose-gold); font-style: italic; font-weight: 500; }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ================= PAGE HERO ================= */
+    .page-hero {
+      padding: 80px 0 60px;
+      background: linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: -30%; right: -15%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(232, 197, 201, 0.5), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .breadcrumb {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+    }
+
+    .breadcrumb a { cursor: pointer; transition: color 0.3s; }
+    .breadcrumb a:hover { color: var(--rose-gold); }
+    .breadcrumb i { font-size: 0.6rem; color: var(--rose-gold-soft); align-self: center; }
+
+    .page-hero h1 {
+      font-size: 3.8rem;
+      margin-bottom: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      position: relative;
+      z-index: 2;
+    }
+
+    .page-hero h1 em { color: var(--rose-gold); font-style: italic; font-weight: 500; }
+    .page-hero p { color: var(--ink-soft); font-size: 1.05rem; max-width: 600px; margin: 0 auto; position: relative; z-index: 2; }
+
+    /* ================= CATEGORIES ================= */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .category-card {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 20px;
+      transition: all 0.5s;
+      box-shadow: var(--shadow-soft);
+      display: block;
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s;
+    }
+
+    .category-card:hover img { transform: scale(1.08); }
+
+    .category-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(44, 36, 32, 0.85) 100%);
+      transition: all 0.4s;
+    }
+
+    .category-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-6px);
+    }
+
+    .category-info {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      right: 30px;
+      z-index: 3;
+    }
+
+    .category-info h3 {
+      font-size: 1.7rem;
+      color: var(--white);
+      margin-bottom: 6px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .category-info p {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--rose-gold-soft);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.3s;
+    }
+
+    .category-card:hover .category-info p { gap: 14px; }
+
+    /* Category Blocks */
+    .category-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: 30px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 80px;
+      border: 1px solid rgba(232, 197, 201, 0.4);
+      transition: all 0.5s;
+    }
+
+    .category-block:hover { box-shadow: var(--shadow-hover); }
+    .category-block:nth-child(even) .category-block-image { order: 2; }
+
+    .category-block-image {
+      position: relative;
+      overflow: hidden;
+      min-height: 480px;
+    }
+
+    .category-block-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s;
+    }
+
+    .category-block:hover .category-block-image img { transform: scale(1.06); }
+
+    .category-block-content {
+      padding: 70px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .category-block-content .cat-eyebrow {
+      display: inline-block;
+      color: var(--rose-gold);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--rose-gold-soft);
+      align-self: flex-start;
+    }
+
+    .category-block-content h2 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      line-height: 1.15;
+      font-weight: 600;
+    }
+
+    .category-block-content h2 em { color: var(--rose-gold); font-style: italic; font-weight: 500; }
+
+    .category-block-content p {
+      color: var(--ink-soft);
+      font-size: 1rem;
+      line-height: 1.9;
+      margin-bottom: 32px;
+    }
+
+    .cat-features {
+      list-style: none;
+      margin-bottom: 36px;
+    }
+
+    .cat-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(232, 197, 201, 0.6);
+    }
+
+    .cat-features li:last-child { border-bottom: none; }
+    .cat-features li i { color: var(--rose-gold); font-size: 0.85rem; width: 16px; }
+
+    /* ================= PRODUCTS ================= */
+    .products-section {
+      background: linear-gradient(180deg, var(--cream-2) 0%, var(--beige) 100%);
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .product-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding: 20px 24px;
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(232, 197, 201, 0.4);
       flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .toolbar-left strong { color: var(--rose-gold); font-weight: 600; }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
       gap: 12px;
     }
 
-    .nav {
-      order: 3;
-      width: 100%;
+    .toolbar-right label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .toolbar-right select {
+      background: var(--cream-2);
+      border: 1px solid var(--rose-gold-soft);
+      color: var(--ink);
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      border-radius: 40px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* ===== FILTER BUTTONS VỚI ẢNH/ICON ===== */
+    .product-filters {
+      display: flex;
       justify-content: center;
-      gap: 2px;
+      gap: 20px;
+      margin-bottom: 60px;
       flex-wrap: wrap;
     }
 
-    .nav a {
-      font-size: 0.85rem;
-      padding: 8px 12px;
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(232, 197, 201, 0.5);
+      color: var(--ink-soft);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 14px 26px;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .cart-icon {
-      padding: 8px 16px !important;
-      font-size: 0.85rem !important;
+    .filter-btn .filter-thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--white);
+      box-shadow: 0 4px 10px rgba(183, 110, 121, 0.15);
+      transition: all 0.4s;
+      flex-shrink: 0;
     }
 
-    .hero {
-      padding: 50px 0 60px;
-    }
-
-    .float-card-1 { top: 0; left: 0; }
-    .float-card-2 { bottom: 0; right: 0; }
-    .float-card-3 { display: none; }
-
-    .features-section {
-      padding: 40px 24px;
-      border-radius: 30px;
-    }
-
-    .cta-banner {
-      padding: 36px 28px;
-      text-align: center;
+    .filter-btn .filter-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose-gold-soft), var(--beige));
+      display: flex;
+      align-items: center;
       justify-content: center;
+      color: var(--rose-gold);
+      font-size: 0.85rem;
+      transition: all 0.4s;
+      flex-shrink: 0;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--rose-gold-soft);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(183, 110, 121, 0.12);
+    }
+
+    .filter-btn:hover .filter-thumb,
+    .filter-btn:hover .filter-icon {
+      transform: scale(1.1) rotate(-5deg);
+      border-color: var(--rose-gold-soft);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--rose-gold), #a05a65);
+      border-color: var(--rose-gold);
+      color: var(--white);
+      box-shadow: 0 12px 30px rgba(183, 110, 121, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .filter-btn.active .filter-thumb {
+      border-color: var(--white);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .filter-btn.active .filter-icon {
+      background: rgba(255, 255, 255, 0.25);
+      color: var(--white);
+    }
+
+    /* ===== PRODUCT GRID ===== */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: 24px;
+      transition: all 0.5s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 30px rgba(183, 110, 121, 0.06);
+      border: 1px solid rgba(232, 197, 201, 0.4);
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--rose-gold-soft);
+    }
+
+    .product-image {
+      position: relative;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      background: var(--cream-2);
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s;
+    }
+
+    .product-card:hover .product-image img { transform: scale(1.07); }
+
+    .product-badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: var(--rose-gold);
+      color: var(--white);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      z-index: 3;
       border-radius: 30px;
     }
 
+    .product-badge.sale { background: #d97a5a; }
+
+    .product-actions {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 3;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.4s;
+    }
+
+    .product-card:hover .product-actions {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .action-btn {
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--rose-gold-soft);
+      color: var(--ink-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.85rem;
+      border-radius: 50%;
+    }
+
+    .action-btn:hover {
+      background: var(--rose-gold);
+      color: var(--white);
+      border-color: var(--rose-gold);
+      transform: scale(1.08);
+    }
+
+    .product-info {
+      padding: 26px 24px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-cat {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--rose-gold);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .product-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 10px;
+      line-height: 1.3;
+      transition: color 0.3s;
+    }
+
+    .product-card:hover .product-title { color: var(--rose-gold); }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .product-rating .stars {
+      color: var(--gold);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+    }
+
+    .product-price {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      margin-top: auto;
+    }
+
+    .price-current {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--rose-gold);
+      line-height: 1;
+    }
+
+    .price-old {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .btn-cart {
+      width: 100%;
+      background: var(--ink);
+      border: 1px solid var(--ink);
+      color: var(--white);
+      padding: 15px 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 60px;
+    }
+
+    .btn-cart:hover {
+      background: var(--rose-gold);
+      border-color: var(--rose-gold);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(183, 110, 121, 0.3);
+    }
+
+    .view-all-wrap {
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    /* ================= CTA ================= */
+    .cta-section {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--rose-gold-soft) 0%, var(--beige) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section h2 {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      font-weight: 600;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-section h2 em { color: var(--rose-gold); font-style: italic; }
+
+    .cta-section p {
+      color: var(--ink-soft);
+      margin-bottom: 36px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ================= NEWSLETTER ================= */
+    .newsletter {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--rose-gold-soft) 0%, var(--beige) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter::before,
+    .newsletter::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .newsletter::before { width: 600px; height: 600px; }
+    .newsletter::after { width: 800px; height: 800px; border-color: rgba(255, 255, 255, 0.25); }
+
+    .newsletter h2 {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .newsletter h2 em { color: var(--rose-gold); font-style: italic; }
+
+    .newsletter p {
+      color: var(--ink-soft);
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 540px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      background: var(--white);
+      border-radius: 60px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(183, 110, 121, 0.15);
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 20px 28px;
+      color: var(--ink);
+      font-size: 0.92rem;
+      outline: none;
+    }
+
+    .newsletter-form input::placeholder { color: var(--text-muted); }
+
+    .newsletter-form button {
+      background: var(--ink);
+      border: none;
+      color: var(--white);
+      padding: 0 40px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .newsletter-form button:hover { background: var(--rose-gold); }
+
+    /* ================= FOOTER ================= */
     footer {
-      border-radius: 30px 30px 0 0;
+      background: var(--cream-2);
+      padding: 90px 0 30px;
+      border-top: 1px solid rgba(232, 197, 201, 0.5);
+      position: relative;
+      z-index: 1;
     }
-  }
-
-  @media (max-width: 560px) {
-    .product-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .hero-img-main {
-      width: 240px;
-      height: 240px;
-      font-size: 7rem;
-    }
-
-    .hero-circle {
-      width: 280px;
-      height: 280px;
-    }
-
-    .float-card {
-      padding: 10px 14px;
-    }
-
-    .float-card i {
-      width: 34px;
-      height: 34px;
-      font-size: 1.1rem;
-    }
-
-    .float-card-text strong { font-size: 0.85rem; }
-    .float-card-text span { font-size: 0.7rem; }
 
     .footer-grid {
-      grid-template-columns: 1fr;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.2fr;
+      gap: 60px;
+      margin-bottom: 60px;
     }
 
-    .footer-brand {
-      grid-column: span 1;
+    .footer-brand .logo {
+      font-size: 1.85rem;
+      margin-bottom: 20px;
+      display: inline-block;
     }
-  }
-</style>
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.85;
+      margin-bottom: 28px;
+      max-width: 340px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 14px;
+    }
+
+    .social-icons a {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--rose-gold-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--rose-gold);
+      transition: all 0.3s;
+      font-size: 0.9rem;
+      border-radius: 50%;
+      background: var(--white);
+    }
+
+    .social-icons a:hover {
+      background: var(--rose-gold);
+      border-color: var(--rose-gold);
+      color: var(--white);
+      transform: translateY(-3px);
+    }
+
+    .footer-col h4 {
+      font-family: 'Jost', sans-serif;
+      color: var(--ink);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 14px;
+    }
+
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: var(--rose-gold);
+      border-radius: 10px;
+    }
+
+    .footer-col a {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      display: block;
+      margin-bottom: 14px;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .footer-col a:hover { color: var(--rose-gold); padding-left: 8px; }
+
+    .footer-contact p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      line-height: 1.65;
+    }
+
+    .footer-contact i { color: var(--rose-gold); margin-top: 4px; width: 16px; flex-shrink: 0; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(232, 197, 201, 0.5);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .footer-bottom .payment {
+      display: flex;
+      gap: 16px;
+      font-size: 1.5rem;
+      color: #b8a99a;
+    }
+
+    .footer-bottom .payment i:hover { color: var(--rose-gold); transition: color 0.3s; }
+
+    /* ================= SCROLL TOP ================= */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--rose-gold);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s;
+      border: none;
+      font-size: 1rem;
+      border-radius: 50%;
+      box-shadow: 0 10px 25px rgba(183, 110, 121, 0.3);
+    }
+
+    .scroll-top.visible { opacity: 1; visibility: visible; }
+    .scroll-top:hover { transform: translateY(-5px); background: var(--ink); }
+
+    /* ================= TOAST ================= */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--ink);
+      color: var(--white);
+      padding: 16px 32px;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      box-shadow: 0 15px 40px rgba(44, 36, 32, 0.3);
+      z-index: 999;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 90vw;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast i { color: var(--rose-gold-light); }
+
+    /* ================= CART DRAWER ================= */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 36, 32, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s;
+    }
+
+    .cart-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      background: var(--cream);
+      z-index: 201;
+      transform: translateX(100%);
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -20px 0 60px rgba(183, 110, 121, 0.2);
+    }
+
+    .cart-drawer.active {
+      transform: translateX(0);
+    }
+
+    .cart-header {
+      padding: 26px 28px;
+      border-bottom: 1px solid rgba(232, 197, 201, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--white);
+    }
+
+    .cart-header h3 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-header h3 i {
+      color: var(--rose-gold);
+      font-size: 1.2rem;
+    }
+
+    .cart-count-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .cart-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--cream-2);
+      border: 1px solid rgba(232, 197, 201, 0.5);
+      color: var(--ink-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .cart-close:hover {
+      background: var(--rose-gold);
+      color: var(--white);
+      border-color: var(--rose-gold);
+      transform: rotate(90deg);
+    }
+
+    .cart-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 28px;
+    }
+
+    .cart-body::-webkit-scrollbar { width: 6px; }
+    .cart-body::-webkit-scrollbar-track { background: transparent; }
+    .cart-body::-webkit-scrollbar-thumb {
+      background: var(--rose-gold-soft);
+      border-radius: 10px;
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .cart-empty i {
+      font-size: 4rem;
+      color: var(--rose-gold-soft);
+      margin-bottom: 24px;
+    }
+
+    .cart-empty h4 {
+      font-size: 1.5rem;
+      color: var(--ink);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .cart-empty p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 28px;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(232, 197, 201, 0.5);
+      animation: fadeUp 0.4s ease forwards;
+    }
+
+    .cart-item:last-child { border-bottom: none; }
+
+    .cart-item-image {
+      width: 84px;
+      height: 84px;
+      border-radius: 14px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--cream-2);
+      border: 1px solid rgba(232, 197, 201, 0.5);
+    }
+
+    .cart-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cart-item-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .cart-item-cat {
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--rose-gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .cart-item-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .cart-item-price {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--rose-gold);
+      margin-bottom: 10px;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(232, 197, 201, 0.6);
+      border-radius: 40px;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      color: var(--ink-soft);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-btn:hover {
+      background: var(--rose-gold);
+      color: var(--white);
+    }
+
+    .qty-value {
+      width: 32px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .cart-item-remove {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.3s;
+      padding: 6px;
+      border-radius: 50%;
+    }
+
+    .cart-item-remove:hover {
+      color: #d97a5a;
+      background: rgba(217, 122, 90, 0.1);
+    }
+
+    .cart-footer {
+      padding: 24px 28px;
+      background: var(--white);
+      border-top: 1px solid rgba(232, 197, 201, 0.5);
+    }
+
+    .cart-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+    }
+
+    .cart-summary-row.total {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      padding-top: 16px;
+      border-top: 1px dashed rgba(232, 197, 201, 0.7);
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+
+    .cart-summary-row.total .price { color: var(--rose-gold); }
+
+    .cart-checkout {
+      width: 100%;
+      background: linear-gradient(135deg, var(--rose-gold), #a05a65);
+      color: var(--white);
+      border: none;
+      padding: 18px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: all 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 12px 30px rgba(183, 110, 121, 0.3);
+    }
+
+    .cart-checkout:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 45px rgba(183, 110, 121, 0.45);
+    }
+
+    .cart-note {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .cart-note i { color: var(--rose-gold); margin-right: 4px; }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 1100px) {
+      .hero-content h1 { font-size: 3.4rem; }
+      .categories { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+      .hero-content h1 { font-size: 2.9rem; }
+      .hero-stats { gap: 30px; }
+      .section-title h2 { font-size: 2.5rem; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .category-block { grid-template-columns: 1fr; }
+      .category-block:nth-child(even) .category-block-image { order: 0; }
+      .category-block-image { min-height: 300px; }
+      .category-block-content { padding: 50px 40px; }
+      .category-block-content h2 { font-size: 2.2rem; }
+      .page-hero h1 { font-size: 2.8rem; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      .hero { padding: 60px 0 80px; }
+      .hero-content h1 { font-size: 2.2rem; }
+      .hero-stats { flex-wrap: wrap; }
+      .stat-item h4 { font-size: 2.1rem; }
+      .section { padding: 80px 0; }
+      .section-title h2 { font-size: 2rem; }
+      .section-title { margin-bottom: 50px; }
+      .categories { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-float-tag { display: none; }
+      .newsletter-form { flex-direction: column; border-radius: 20px; }
+      .newsletter-form button { padding: 18px; }
+      .footer-bottom { justify-content: center; text-align: center; }
+      .top-bar { font-size: 0.62rem; letter-spacing: 2px; padding: 9px 15px; }
+      .page-hero { padding: 50px 0 40px; }
+      .page-hero h1 { font-size: 2.2rem; }
+      .category-block-content { padding: 40px 28px; }
+      .category-block-content h2 { font-size: 1.9rem; }
+      .product-toolbar { flex-direction: column; align-items: stretch; }
+
+      .product-filters {
+        gap: 10px;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
+      }
+      .product-filters::-webkit-scrollbar { display: none; }
+      .filter-btn {
+        padding: 10px 16px;
+        font-size: 0.62rem;
+        letter-spacing: 1.5px;
+        white-space: nowrap;
+      }
+      .filter-btn .filter-thumb,
+      .filter-btn .filter-icon {
+        width: 26px;
+        height: 26px;
+      }
+
+      .cart-drawer { max-width: 100%; }
+      .cart-header { padding: 20px; }
+      .cart-body { padding: 16px 20px; }
+      .cart-footer { padding: 20px; }
+      .cart-item-image { width: 70px; height: 70px; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ========== HEADER ========== -->
-<header>
-  <div class="header-inner">
-    <div class="logo">
-      <div class="logo-icon">
-        <i class="fas fa-seedling"></i>
-      </div>
-      <div class="logo-text">
-        Vườn Xinh
-        <span>Cây cảnh</span>
-      </div>
-    </div>
+  <!-- Top Bar -->
+  <div class="top-bar">✦ Miễn phí vận chuyển toàn quốc cho đơn từ 500K ✦ Tặng kèm quà tặng cao cấp ✦</div>
 
-    <nav class="nav">
-      <a href="#">Trang chủ</a>
-      <a href="#">Trong nhà</a>
-      <a href="#">Ngoài trời</a>
-      <a href="#">Phụ kiện</a>
-      <a href="#" class="cart-icon">
-        <i class="fas fa-shopping-bag"></i>
-        Giỏ hàng
-        <span class="cart-badge">3</span>
-      </a>
-    </nav>
-  </div>
-</header>
-
-<!-- ========== HERO ========== -->
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <i class="fas fa-sparkles"></i>
-        Bộ sưu tập mùa xuân 2025
-      </div>
-
-      <h1>
-        Mang <em>thiên nhiên</em><br>
-        vào tổ ấm của bạn
-      </h1>
-
-      <p>
-        Hơn 200+ loại cây cảnh khỏe mạnh, được tuyển chọn kỹ lưỡng. Giao hàng tận nơi, bảo hành xanh 30 ngày, tư vấn chăm sóc trọn đời.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#" class="btn-primary">
-          <span>Khám phá ngay</span>
-          <i class="fas fa-arrow-right"></i>
-        </a>
-        <a href="#" class="btn-ghost">
-          <i class="fas fa-play-circle"></i>
-          Xem video
-        </a>
+  <!-- Header -->
+  <header id="header">
+    <div class="container nav-wrapper">
+      <a class="logo" onclick="navigateTo('home')">Nàng Thơ<span>Beauty</span></a>
+      <ul class="nav-links">
+        <li><a data-page="home" class="active" onclick="navigateTo('home')">Trang chủ</a></li>
+        <li><a data-page="categories" onclick="navigateTo('categories')">Danh mục</a></li>
+        <li><a data-page="products" onclick="navigateTo('products')">Sản phẩm</a></li>
+        <li><a data-page="story" onclick="navigateTo('story')">Câu chuyện</a></li>
+        <li><a data-page="contact" onclick="navigateTo('contact')">Liên hệ</a></li>
+      </ul>
+      <div class="nav-icons">
+        <i class="fas fa-search"></i>
+        <i class="far fa-user"></i>
+        <i class="far fa-heart"></i>
+        <i class="fas fa-shopping-bag cart-icon" id="cartIcon" data-count="0"></i>
       </div>
     </div>
+  </header>
 
-    <div class="hero-visual">
-      <div class="hero-circle"></div>
+  <!-- =====================================================
+       PAGE: HOME
+       ===================================================== -->
+  <main id="page-home" class="page active">
 
-      <div class="hero-img-main">
-        <i class="fas fa-tree"></i>
-      </div>
-
-      <div class="float-card float-card-1">
-        <i class="fas fa-truck-fast"></i>
-        <div class="float-card-text">
-          <strong>Giao nhanh 2h</strong>
-          <span>Trong nội thành</span>
-        </div>
-      </div>
-
-      <div class="float-card float-card-2">
-        <i class="fas fa-shield-heart"></i>
-        <div class="float-card-text">
-          <strong>Bảo hành 30 ngày</strong>
-          <span>1 đổi 1 miễn phí</span>
-        </div>
-      </div>
-
-      <div class="float-card float-card-3">
-        <i class="fas fa-star"></i>
-        <div class="float-card-text">
-          <strong>4.9/5 sao</strong>
-          <span>2.500+ đánh giá</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== MARQUEE ========== -->
-<div class="marquee">
-  <div class="marquee-track">
-    <div class="marquee-item"><i class="fas fa-leaf"></i> Cây khỏe mạnh</div>
-    <div class="marquee-item"><i class="fas fa-leaf"></i> Giao tận nơi</div>
-    <div class="marquee-item"><i class="fas fa-leaf"></i> Bảo hành xanh</div>
-    <div class="marquee-item"><i class="fas fa-leaf"></i> Tư vấn 24/7</div>
-    <div class="marquee-item"><i class="fas fa-leaf"></i> Giá tốt nhất</div>
-    <div class="marquee-item"><i class="fas fa-leaf"></i> Cây khỏe mạnh</div>
-    <div class="marquee-item"><i class="fas fa-leaf"></i> Giao tận nơi</div>
-    <div class="marquee-item"><i class="fas fa-leaf"></i> Bảo hành xanh</div>
-    <div class="marquee-item"><i class="fas fa-leaf"></i> Tư vấn 24/7</div>
-    <div class="marquee-item"><i class="fas fa-leaf"></i> Giá tốt nhất</div>
-  </div>
-</div>
-
-<!-- ========== SẢN PHẨM ========== -->
-<div class="container">
-  <div class="section-header">
-    <div class="section-eyebrow">Bộ sưu tập</div>
-    <h2>Cây cảnh <em>nổi bật</em></h2>
-    <p>Những chậu cây được yêu thích nhất, phù hợp với mọi không gian sống hiện đại</p>
-  </div>
-
-  <div class="product-grid">
-    <!-- SP 1 -->
-    <div class="product-card">
-      <div class="product-img">
-        <span class="badge hot">🔥 Bán chạy</span>
-        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-        <i class="fas fa-tree"></i>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Phong thủy</div>
-        <h3 class="product-name">Cây Kim Tiền</h3>
-        <div class="product-desc">
-          <span><i class="fas fa-sun"></i> Bóng râm</span>
-          <span><i class="fas fa-tint"></i> 1 lần/tuần</span>
-        </div>
-        <div class="rating">
-          <span class="stars">★★★★★</span>
-          <span>(128)</span>
-        </div>
-        <div class="price-row">
-          <div class="price-wrap">
-            <span class="price">320<small>.000đ</small></span>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="badge fade-up">Bộ sưu tập 2025</div>
+          <h1 class="fade-up delay-1">Vẻ đẹp <em>đích thực</em><br>từ thiên nhiên</h1>
+          <p class="fade-up delay-2">Khám phá dòng mỹ phẩm cao cấp được chắt lọc từ tinh hoa thực vật quý hiếm, kết hợp cùng công nghệ sinh học tiên tiến – mang đến làn da rạng rỡ và vẻ đẹp vượt thời gian.</p>
+          <div class="hero-cta fade-up delay-3">
+            <button class="btn-luxury" onclick="navigateTo('products')">Khám phá ngay <i class="fas fa-arrow-right"></i></button>
+            <button class="btn-outline" onclick="navigateTo('categories')">Xem bộ sưu tập</button>
           </div>
-          <button class="btn-add" title="Thêm vào giỏ"><i class="fas fa-plus"></i></button>
+          <div class="hero-stats fade-up delay-3">
+            <div class="stat-item"><h4>150+</h4><p>Sản phẩm</p></div>
+            <div class="stat-item"><h4>50K+</h4><p>Khách hàng</p></div>
+            <div class="stat-item"><h4>4.9★</h4><p>Đánh giá</p></div>
+          </div>
         </div>
+        <div class="hero-visual">
+          <div class="hero-image-wrap">
+            <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&auto=format&fit=crop&q=80" alt="Mỹ phẩm cao cấp">
+          </div>
+          <div class="hero-float-tag tag-1">
+            <div class="label">Best Seller</div>
+            <div class="value">Serum Vàng 24K</div>
+          </div>
+          <div class="hero-float-tag tag-2">
+            <div class="label">Organic</div>
+            <div class="value">100% Tự nhiên</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee">
+      <div class="marquee-track">
+        <span>Nàng Thơ Beauty <i class="fas fa-star"></i> Mỹ phẩm cao cấp <i class="fas fa-star"></i> Thành phần hữu cơ <i class="fas fa-star"></i> Không thử nghiệm động vật <i class="fas fa-star"></i></span>
+        <span>Nàng Thơ Beauty <i class="fas fa-star"></i> Mỹ phẩm cao cấp <i class="fas fa-star"></i> Thành phần hữu cơ <i class="fas fa-star"></i> Không thử nghiệm động vật <i class="fas fa-star"></i></span>
       </div>
     </div>
 
-    <!-- SP 2 -->
-    <div class="product-card">
-      <div class="product-img">
-        <span class="badge new">✨ Mới</span>
-        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-        <i class="fas fa-leaf"></i>
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <div class="section-eyebrow">Danh mục</div>
+          <h2>Bộ sưu tập <em>đặc biệt</em></h2>
+          <p>Từng dòng sản phẩm được tuyển chọn kỹ lưỡng, đáp ứng mọi nhu cầu làm đẹp của bạn</p>
+        </div>
+        <div class="categories">
+          <a class="category-card" onclick="navigateToCategory('skincare')">
+            <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&auto=format&fit=crop&q=80" alt="Chăm sóc da">
+            <div class="category-info"><h3>Chăm sóc da</h3><p>Khám phá <i class="fas fa-arrow-right"></i></p></div>
+          </a>
+          <a class="category-card" onclick="navigateToCategory('makeup')">
+            <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&auto=format&fit=crop&q=80" alt="Trang điểm">
+            <div class="category-info"><h3>Trang điểm</h3><p>Khám phá <i class="fas fa-arrow-right"></i></p></div>
+          </a>
+          <a class="category-card" onclick="navigateToCategory('perfume')">
+            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&auto=format&fit=crop&q=80" alt="Nước hoa">
+            <div class="category-info"><h3>Nước hoa</h3><p>Khám phá <i class="fas fa-arrow-right"></i></p></div>
+          </a>
+          <a class="category-card" onclick="navigateToCategory('suncare')">
+            <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&auto=format&fit=crop&q=80" alt="Chống nắng">
+            <div class="category-info"><h3>Chống nắng</h3><p>Khám phá <i class="fas fa-arrow-right"></i></p></div>
+          </a>
+        </div>
       </div>
-      <div class="product-info">
-        <div class="product-category">Trong nhà</div>
-        <h3 class="product-name">Trầu Bà Nam Mỹ</h3>
-        <div class="product-desc">
-          <span><i class="fas fa-tint"></i> 2 lần/tuần</span>
-          <span><i class="fas fa-wind"></i> Lọc khí</span>
+    </section>
+
+    <section class="products-section">
+      <div class="container">
+        <div class="section-title">
+          <div class="section-eyebrow">Sản phẩm</div>
+          <h2>Được yêu thích <em>nhất</em></h2>
+          <p>Những sản phẩm bán chạy và được đánh giá cao bởi hàng ngàn khách hàng</p>
         </div>
-        <div class="rating">
-          <span class="stars">★★★★★</span>
-          <span>(94)</span>
+        <div class="product-grid" id="homeProductGrid"></div>
+        <div class="view-all-wrap">
+          <button class="btn-luxury" onclick="navigateTo('products')">Xem tất cả sản phẩm <i class="fas fa-arrow-right"></i></button>
         </div>
-        <div class="price-row">
-          <div class="price-wrap">
-            <span class="price">185<small>.000đ</small></span>
+      </div>
+    </section>
+
+    <section class="cta-section" id="story">
+      <div class="container">
+        <h2>Câu chuyện <em>thương hiệu</em></h2>
+        <p>Nàng Thơ Beauty ra đời từ tình yêu với vẻ đẹp thuần khiết của người phụ nữ Việt. Chúng tôi tin rằng mỗi người phụ nữ đều là một nàng thơ – và xứng đáng được tỏa sáng theo cách riêng của mình.</p>
+        <button class="btn-outline" onclick="navigateTo('contact')">Tìm hiểu thêm</button>
+      </div>
+    </section>
+
+    <section class="newsletter" id="contact">
+      <div class="container">
+        <h2>Đăng ký nhận <em>ưu đãi</em></h2>
+        <p>Nhận thông tin về sản phẩm mới và ưu đãi độc quyền dành riêng cho bạn</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('Cảm ơn bạn đã đăng ký Nàng Thơ Beauty!'); this.reset();">
+          <input type="email" placeholder="Nhập địa chỉ email của bạn..." required>
+          <button type="submit">Đăng ký</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================
+       PAGE: CATEGORIES
+       ===================================================== -->
+  <main id="page-categories" class="page">
+
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb fade-up">
+          <a onclick="navigateTo('home')">Trang chủ</a>
+          <i class="fas fa-chevron-right"></i>
+          <span style="color: var(--rose-gold);">Danh mục</span>
+        </div>
+        <h1 class="fade-up">Bộ sưu tập <em>đặc biệt</em></h1>
+        <p class="fade-up">Khám phá từng danh mục sản phẩm được tuyển chọn kỹ lưỡng, mang đến vẻ đẹp rạng rỡ cho mọi làn da</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <div class="category-block">
+          <div class="category-block-image">
+            <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80" alt="Chăm sóc da">
           </div>
-          <button class="btn-add" title="Thêm vào giỏ"><i class="fas fa-plus"></i></button>
+          <div class="category-block-content">
+            <span class="cat-eyebrow">Danh mục 01</span>
+            <h2>Chăm sóc <em>da</em></h2>
+            <p>Bộ sưu tập dưỡng da cao cấp với thành phần hữu cơ quý hiếm, giúp nuôi dưỡng làn da từ sâu bên trong, mang đến vẻ đẹp căng mọng và rạng rỡ tự nhiên.</p>
+            <ul class="cat-features">
+              <li><i class="fas fa-check"></i> Serum đặc trị & tinh chất cao cấp</li>
+              <li><i class="fas fa-check"></i> Kem dưỡng ẩm & phục hồi chuyên sâu</li>
+              <li><i class="fas fa-check"></i> Mặt nạ dưỡng da đa tầng</li>
+              <li><i class="fas fa-check"></i> Tẩy trang & làm sạch dịu nhẹ</li>
+            </ul>
+            <button class="btn-luxury" onclick="navigateToCategory('skincare')">Xem sản phẩm <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <div class="category-block">
+          <div class="category-block-image">
+            <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&auto=format&fit=crop&q=80" alt="Trang điểm">
+          </div>
+          <div class="category-block-content">
+            <span class="cat-eyebrow">Danh mục 02</span>
+            <h2>Trang <em>điểm</em></h2>
+            <p>Dòng trang điểm cao cấp với công thức tiên tiến, bảng màu đa dạng phù hợp với mọi làn da Á Đông, giúp bạn tự tin tỏa sáng mỗi ngày.</p>
+            <ul class="cat-features">
+              <li><i class="fas fa-check"></i> Son môi Velvet & Matte cao cấp</li>
+              <li><i class="fas fa-check"></i> Cushion & kem nền che phủ hoàn hảo</li>
+              <li><i class="fas fa-check"></i> Phấn mắt & má hồng tông tự nhiên</li>
+              <li><i class="fas fa-check"></i> Kẻ mắt & chân mày sắc nét</li>
+            </ul>
+            <button class="btn-luxury" onclick="navigateToCategory('makeup')">Xem sản phẩm <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <div class="category-block">
+          <div class="category-block-image">
+            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&auto=format&fit=crop&q=80" alt="Nước hoa">
+          </div>
+          <div class="category-block-content">
+            <span class="cat-eyebrow">Danh mục 03</span>
+            <h2>Nước <em>hoa</em></h2>
+            <p>Bộ sưu tập nước hoa cao cấp với hương thơm quyến rũ, lưu hương lâu dài, được chắt lọc từ những nguyên liệu quý hiếm nhất từ Pháp và Ý.</p>
+            <ul class="cat-features">
+              <li><i class="fas fa-check"></i> Nước hoa nữ quyến rũ & sang trọng</li>
+              <li><i class="fas fa-check"></i> Nước hoa nam mạnh mẽ & lịch lãm</li>
+              <li><i class="fas fa-check"></i> Unisex hương gỗ & amber ấm áp</li>
+              <li><i class="fas fa-check"></i> Xịt thơm body & dưỡng hương</li>
+            </ul>
+            <button class="btn-luxury" onclick="navigateToCategory('perfume')">Xem sản phẩm <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+        <div class="category-block">
+          <div class="category-block-image">
+            <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=800&auto=format&fit=crop&q=80" alt="Chống nắng">
+          </div>
+          <div class="category-block-content">
+            <span class="cat-eyebrow">Danh mục 04</span>
+            <h2>Chống <em>nắng</em></h2>
+            <p>Bảo vệ làn da khỏi tác hại của tia UV với các sản phẩm chống nắng phổ rộng SPF 50+ PA++++, không gây bết dính, phù hợp mọi loại da.</p>
+            <ul class="cat-features">
+              <li><i class="fas fa-check"></i> Kem chống nắng nâng tông tự nhiên</li>
+              <li><i class="fas fa-check"></i> Xịt chống nắng tiện lợi mọi lúc</li>
+              <li><i class="fas fa-check"></i> Chống nắng vật lý cho da nhạy cảm</li>
+              <li><i class="fas fa-check"></i> Dưỡng thể chống nắng toàn thân</li>
+            </ul>
+            <button class="btn-luxury" onclick="navigateToCategory('suncare')">Xem sản phẩm <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================
+       PAGE: PRODUCTS
+       ===================================================== -->
+  <main id="page-products" class="page">
+
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb fade-up">
+          <a onclick="navigateTo('home')">Trang chủ</a>
+          <i class="fas fa-chevron-right"></i>
+          <span style="color: var(--rose-gold);">Sản phẩm</span>
+        </div>
+        <h1 class="fade-up">Tất cả <em>sản phẩm</em></h1>
+        <p class="fade-up">Khám phá toàn bộ bộ sưu tập mỹ phẩm cao cấp của Nàng Thơ Beauty</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <div class="product-toolbar">
+          <div class="toolbar-left">
+            Hiển thị <strong id="productCount">22</strong> sản phẩm
+          </div>
+          <div class="toolbar-right">
+            <label for="sortSelect">Sắp xếp:</label>
+            <select id="sortSelect">
+              <option value="default">Mặc định</option>
+              <option value="price-asc">Giá thấp → cao</option>
+              <option value="price-desc">Giá cao → thấp</option>
+              <option value="rating">Đánh giá cao nhất</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="product-filters">
+          <button class="filter-btn active" data-filter="all">
+            <span class="filter-icon"><i class="fas fa-sparkles"></i></span>
+            <span>Tất cả</span>
+          </button>
+          <button class="filter-btn" data-filter="skincare">
+            <img class="filter-thumb" src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=100&auto=format&fit=crop&q=80" alt="Dưỡng da">
+            <span>Dưỡng da</span>
+          </button>
+          <button class="filter-btn" data-filter="makeup">
+            <img class="filter-thumb" src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=100&auto=format&fit=crop&q=80" alt="Trang điểm">
+            <span>Trang điểm</span>
+          </button>
+          <button class="filter-btn" data-filter="perfume">
+            <img class="filter-thumb" src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=100&auto=format&fit=crop&q=80" alt="Nước hoa">
+            <span>Nước hoa</span>
+          </button>
+          <button class="filter-btn" data-filter="suncare">
+            <img class="filter-thumb" src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=100&auto=format&fit=crop&q=80" alt="Chống nắng">
+            <span>Chống nắng</span>
+          </button>
+        </div>
+
+        <div class="product-grid" id="productsGrid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" onclick="navigateTo('home')">Nàng Thơ<span>Beauty</span></a>
+          <p>Thương hiệu mỹ phẩm cao cấp hàng đầu Việt Nam, mang đến vẻ đẹp thuần khiết và rạng rỡ cho phái đẹp từ năm 2005.</p>
+          <div class="social-icons">
+            <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+            <a href="javascript:void(0)"><i class="fab fa-instagram"></i></a>
+            <a href="javascript:void(0)"><i class="fab fa-tiktok"></i></a>
+            <a href="javascript:void(0)"><i class="fab fa-youtube"></i></a>
+            <a href="javascript:void(0)"><i class="fab fa-pinterest-p"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Về chúng tôi</h4>
+          <a onclick="navigateTo('story')">Câu chuyện thương hiệu</a>
+          <a href="javascript:void(0)">Tầm nhìn & Sứ mệnh</a>
+          <a href="javascript:void(0)">Hệ thống cửa hàng</a>
+          <a href="javascript:void(0)">Tuyển dụng</a>
+        </div>
+        <div class="footer-col">
+          <h4>Hỗ trợ</h4>
+          <a href="javascript:void(0)">Chính sách đổi trả</a>
+          <a href="javascript:void(0)">Hướng dẫn mua hàng</a>
+          <a href="javascript:void(0)">Phương thức thanh toán</a>
+          <a href="javascript:void(0)">Câu hỏi thường gặp</a>
+        </div>
+        <div class="footer-col footer-contact">
+          <h4>Liên hệ</h4>
+          <p><i class="fas fa-map-marker-alt"></i> 123 Lê Lợi, Quận 1, TP. Hồ Chí Minh</p>
+          <p><i class="fas fa-phone-alt"></i> 1900 6789</p>
+          <p><i class="fas fa-envelope"></i> hello@nangthobeauty.vn</p>
+          <p><i class="fas fa-clock"></i> T2 - CN: 9:00 - 22:00</p>
         </div>
       </div>
+      <div class="footer-bottom">
+        <div>© 2025 Nàng Thơ Beauty. Tất cả các quyền được bảo lưu.</div>
+        <div class="payment">
+          <i class="fab fa-cc-visa"></i>
+          <i class="fab fa-cc-mastercard"></i>
+          <i class="fab fa-cc-paypal"></i>
+          <i class="fas fa-money-bill-wave"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Lên đầu trang"><i class="fas fa-arrow-up"></i></button>
+
+  <!-- ================= CART DRAWER ================= -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <div>
+        <h3><i class="fas fa-shopping-bag"></i> Giỏ hàng</h3>
+        <div class="cart-count-label" id="cartCountLabel">0 sản phẩm</div>
+      </div>
+      <button class="cart-close" onclick="closeCart()" aria-label="Đóng giỏ hàng">
+        <i class="fas fa-times"></i>
+      </button>
     </div>
 
-    <!-- SP 3 -->
-    <div class="product-card">
-      <div class="product-img">
-        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-        <i class="fas fa-seedling"></i>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Để bàn</div>
-        <h3 class="product-name">Sen Đá Mini</h3>
-        <div class="product-desc">
-          <span><i class="fas fa-sun"></i> Ưa nắng</span>
-          <span><i class="fas fa-tint"></i> Ít nước</span>
-        </div>
-        <div class="rating">
-          <span class="stars">★★★★☆</span>
-          <span>(67)</span>
-        </div>
-        <div class="price-row">
-          <div class="price-wrap">
-            <span class="price">95<small>.000đ</small></span>
-          </div>
-          <button class="btn-add" title="Thêm vào giỏ"><i class="fas fa-plus"></i></button>
-        </div>
-      </div>
-    </div>
+    <div class="cart-body" id="cartBody"></div>
 
-    <!-- SP 4 -->
-    <div class="product-card">
-      <div class="product-img">
-        <span class="badge new">✨ Thanh lọc</span>
-        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-        <i class="fas fa-spa"></i>
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+      <div class="cart-summary-row">
+        <span>Tạm tính</span>
+        <span id="cartSubtotal">0 ₫</span>
       </div>
-      <div class="product-info">
-        <div class="product-category">Văn phòng</div>
-        <h3 class="product-name">Cây Lưỡi Hổ</h3>
-        <div class="product-desc">
-          <span><i class="fas fa-moon"></i> Ánh sáng yếu</span>
-          <span><i class="fas fa-wind"></i> Lọc khí</span>
-        </div>
-        <div class="rating">
-          <span class="stars">★★★★★</span>
-          <span>(215)</span>
-        </div>
-        <div class="price-row">
-          <div class="price-wrap">
-            <span class="price">250<small>.000đ</small></span>
-          </div>
-          <button class="btn-add" title="Thêm vào giỏ"><i class="fas fa-plus"></i></button>
-        </div>
+      <div class="cart-summary-row">
+        <span>Phí vận chuyển</span>
+        <span style="color: var(--rose-gold); font-weight: 600;">Miễn phí</span>
+      </div>
+      <div class="cart-summary-row total">
+        <span>Tổng cộng</span>
+        <span class="price" id="cartTotal">0 ₫</span>
+      </div>
+      <button class="cart-checkout" onclick="checkout()">
+        <i class="fas fa-lock"></i> Thanh toán ngay
+      </button>
+      <div class="cart-note">
+        <i class="fas fa-shield-alt"></i> Thanh toán an toàn & bảo mật 100%
       </div>
     </div>
+  </aside>
 
-    <!-- SP 5 -->
-    <div class="product-card">
-      <div class="product-img">
-        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-        <i class="fas fa-pagelines"></i>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Trong nhà</div>
-        <h3 class="product-name">Vạn Niên Thanh</h3>
-        <div class="product-desc">
-          <span><i class="fas fa-shield-alt"></i> Lọc khí</span>
-          <span><i class="fas fa-tint"></i> Dễ chăm</span>
-        </div>
-        <div class="rating">
-          <span class="stars">★★★★★</span>
-          <span>(156)</span>
-        </div>
-        <div class="price-row">
-          <div class="price-wrap">
-            <span class="price">210<small>.000đ</small></span>
-          </div>
-          <button class="btn-add" title="Thêm vào giỏ"><i class="fas fa-plus"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- SP 6 -->
-    <div class="product-card">
-      <div class="product-img">
-        <span class="badge hot">🔥 -15%</span>
-        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-        <i class="fas fa-fan"></i>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Phong thủy</div>
-        <h3 class="product-name">Cây Hạnh Phúc</h3>
-        <div class="product-desc">
-          <span><i class="fas fa-smile"></i> May mắn</span>
-          <span><i class="fas fa-sun"></i> Nắng nhẹ</span>
-        </div>
-        <div class="rating">
-          <span class="stars">★★★★★</span>
-          <span>(88)</span>
-        </div>
-        <div class="price-row">
-          <div class="price-wrap">
-            <span class="price">295<small>.000đ</small></span>
-            <span class="price-old">350.000đ</span>
-          </div>
-          <button class="btn-add" title="Thêm vào giỏ"><i class="fas fa-plus"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- SP 7 -->
-    <div class="product-card">
-      <div class="product-img">
-        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-        <i class="fas fa-tree"></i>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Phong thủy</div>
-        <h3 class="product-name">Cây Ngọc Bích</h3>
-        <div class="product-desc">
-          <span><i class="fas fa-gem"></i> Tài lộc</span>
-          <span><i class="fas fa-tint"></i> 1 lần/tuần</span>
-        </div>
-        <div class="rating">
-          <span class="stars">★★★★★</span>
-          <span>(142)</span>
-        </div>
-        <div class="price-row">
-          <div class="price-wrap">
-            <span class="price">270<small>.000đ</small></span>
-          </div>
-          <button class="btn-add" title="Thêm vào giỏ"><i class="fas fa-plus"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- SP 8 -->
-    <div class="product-card">
-      <div class="product-img">
-        <span class="badge new">🌿 Dễ trồng</span>
-        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-        <i class="fas fa-leaf"></i>
-      </div>
-      <div class="product-info">
-        <div class="product-category">Trong nhà</div>
-        <h3 class="product-name">Cây Dương Xỉ</h3>
-        <div class="product-desc">
-          <span><i class="fas fa-tint"></i> Ưa ẩm</span>
-          <span><i class="fas fa-moon"></i> Bóng râm</span>
-        </div>
-        <div class="rating">
-          <span class="stars">★★★★☆</span>
-          <span>(73)</span>
-        </div>
-        <div class="price-row">
-          <div class="price-wrap">
-            <span class="price">165<small>.000đ</small></span>
-          </div>
-          <button class="btn-add" title="Thêm vào giỏ"><i class="fas fa-plus"></i></button>
-        </div>
-      </div>
-    </div>
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMsg">Đã thêm vào giỏ!</span>
   </div>
 
-  <!-- ========== FEATURES ========== -->
-  <div class="features-section">
-    <div class="features-grid">
-      <div class="feature-item">
-        <div class="feature-icon"><i class="fas fa-truck-fast"></i></div>
-        <h4>Giao hàng miễn phí</h4>
-        <p>Cho đơn từ 500.000đ trong nội thành</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon"><i class="fas fa-shield-heart"></i></div>
-        <h4>Bảo hành cây xanh</h4>
-        <p>1 đổi 1 trong 30 ngày nếu cây hư hại</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon"><i class="fas fa-headset"></i></div>
-        <h4>Tư vấn chăm sóc</h4>
-        <p>Hỗ trợ 24/7 qua hotline & zalo</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon"><i class="fas fa-leaf"></i></div>
-        <h4>Cam kết tự nhiên</h4>
-        <p>100% cây khỏe, không thuốc độc hại</p>
-      </div>
-    </div>
-  </div>
+  <script>
+    /* =====================================================
+       PRODUCT DATA - 22 sản phẩm
+       ===================================================== */
+    const products = [
+      // ========== DƯỠNG DA (skincare) - 6 sản phẩm ==========
+      { id: 1, name: "Serum Vàng 24K Sáng Da", category: "skincare", categoryLabel: "Dưỡng da", price: 1850000, oldPrice: 2400000, rating: 4.9, reviews: 324, badge: "Best Seller", badgeType: "", image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&auto=format&fit=crop&q=80" },
+      { id: 2, name: "Kem Dưỡng Hoa Hồng", category: "skincare", categoryLabel: "Dưỡng da", price: 980000, oldPrice: 1250000, rating: 4.8, reviews: 198, badge: "-22%", badgeType: "sale", image: "https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=600&auto=format&fit=crop&q=80" },
+      { id: 4, name: "Nước Hoa Hồng Organic", category: "skincare", categoryLabel: "Dưỡng da", price: 720000, oldPrice: 890000, rating: 4.9, reviews: 287, badge: "-19%", badgeType: "sale", image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&auto=format&fit=crop&q=80" },
+      { id: 6, name: "Mặt Nạ Đất Sét Detox", category: "skincare", categoryLabel: "Dưỡng da", price: 520000, oldPrice: 650000, rating: 4.6, reviews: 176, badge: "-20%", badgeType: "sale", image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&auto=format&fit=crop&q=80" },
+      { id: 9, name: "Tinh Chất Trẻ Hóa Da", category: "skincare", categoryLabel: "Dưỡng da", price: 2250000, oldPrice: 2800000, rating: 4.9, reviews: 156, badge: "Premium", badgeType: "", image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&auto=format&fit=crop&q=80" },
+      { id: 10, name: "Kem Mắt Chống Nhăn", category: "skincare", categoryLabel: "Dưỡng da", price: 890000, oldPrice: null, rating: 4.7, reviews: 143, badge: "Mới", badgeType: "", image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&auto=format&fit=crop&q=80" },
 
-  <!-- ========== CTA BANNER ========== -->
-  <div class="cta-banner">
-    <div class="cta-content">
-      <h3>Nhận ưu đãi 20% cho đơn đầu tiên</h3>
-      <p>Đăng ký thành viên Vườn Xinh để nhận ngay voucher và nhiều quà tặng hấp dẫn</p>
-    </div>
-    <a href="#" class="btn-primary">
-      <span>Đăng ký ngay</span>
-      <i class="fas fa-arrow-right"></i>
-    </a>
-  </div>
-</div>
+      // ========== TRANG ĐIỂM (makeup) - 4 sản phẩm ==========
+      { id: 3, name: "Son Velvet Matte Cao Cấp", category: "makeup", categoryLabel: "Trang điểm", price: 650000, oldPrice: null, rating: 4.7, reviews: 412, badge: "Mới", badgeType: "", image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&auto=format&fit=crop&q=80" },
+      { id: 8, name: "Cushion Gold Coverage", category: "makeup", categoryLabel: "Trang điểm", price: 1150000, oldPrice: 1450000, rating: 4.8, reviews: 234, badge: "-21%", badgeType: "sale", image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&auto=format&fit=crop&q=80" },
+      { id: 11, name: "Phấn Mắt 12 Ô Nude", category: "makeup", categoryLabel: "Trang điểm", price: 780000, oldPrice: 950000, rating: 4.8, reviews: 189, badge: "-18%", badgeType: "sale", image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&auto=format&fit=crop&q=80" },
+      { id: 12, name: "Má Hồng Tông Đào", category: "makeup", categoryLabel: "Trang điểm", price: 520000, oldPrice: null, rating: 4.7, reviews: 167, badge: "Hot", badgeType: "", image: "https://images.unsplash.com/photo-1631214540242-3cd8c4b0c1e8?w=600&auto=format&fit=crop&q=80" },
 
-<!-- ========== FOOTER ========== -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="logo-text" style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:800; color:white;">
-          Vườn Xinh
-        </div>
-        <p>Chúng tôi mang đến những chậu cây khỏe mạnh, được chăm sóc tận tâm, giúp không gian sống của bạn thêm xanh mát và tràn đầy sức sống.</p>
-        <div class="social-links">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-        </div>
-      </div>
+      // ========== CHỐNG NẮNG (suncare) - 3 sản phẩm ==========
+      { id: 5, name: "Kem Chống Nắng SPF 50+", category: "suncare", categoryLabel: "Chống nắng", price: 850000, oldPrice: null, rating: 4.8, reviews: 356, badge: "Hot", badgeType: "", image: "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?w=600&auto=format&fit=crop&q=80" },
+      { id: 13, name: "Xịt Chống Nắng Toàn Thân", category: "suncare", categoryLabel: "Chống nắng", price: 620000, oldPrice: 780000, rating: 4.7, reviews: 245, badge: "-20%", badgeType: "sale", image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&auto=format&fit=crop&q=80" },
+      { id: 14, name: "Chống Nắng Nâng Tông", category: "suncare", categoryLabel: "Chống nắng", price: 750000, oldPrice: null, rating: 4.9, reviews: 312, badge: "Best Seller", badgeType: "", image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&auto=format&fit=crop&q=80" },
 
-      <div class="footer-col">
-        <h4>Danh mục</h4>
-        <a href="#"><i class="fas fa-chevron-right"></i> Cây trong nhà</a>
-        <a href="#"><i class="fas fa-chevron-right"></i> Cây văn phòng</a>
-        <a href="#"><i class="fas fa-chevron-right"></i> Cây phong thủy</a>
-        <a href="#"><i class="fas fa-chevron-right"></i> Chậu & đất trồng</a>
-        <a href="#"><i class="fas fa-chevron-right"></i> Phụ kiện chăm sóc</a>
-      </div>
+      // ========== NƯỚC HOA (perfume) - 9 sản phẩm ==========
+      { id: 7, name: "Nàng Thơ Signature EDP", category: "perfume", categoryLabel: "Nước hoa", price: 2450000, oldPrice: 2900000, rating: 5.0, reviews: 189, badge: "Best Seller", badgeType: "", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&auto=format&fit=crop&q=80" },
+      { id: 15, name: "Rose Élégante EDP 50ml", category: "perfume", categoryLabel: "Nước hoa", price: 1850000, oldPrice: 2200000, rating: 4.9, reviews: 267, badge: "-16%", badgeType: "sale", image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&auto=format&fit=crop&q=80" },
+      { id: 16, name: "Jasmine Noir Parfum", category: "perfume", categoryLabel: "Nước hoa", price: 3200000, oldPrice: null, rating: 5.0, reviews: 145, badge: "Limited", badgeType: "", image: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=600&auto=format&fit=crop&q=80" },
+      { id: 17, name: "Lavender Dreams EDT 100ml", category: "perfume", categoryLabel: "Nước hoa", price: 1450000, oldPrice: 1750000, rating: 4.8, reviews: 198, badge: "-17%", badgeType: "sale", image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&auto=format&fit=crop&q=80" },
+      { id: 18, name: "Amber Mystique EDP", category: "perfume", categoryLabel: "Nước hoa", price: 2100000, oldPrice: null, rating: 4.9, reviews: 176, badge: "Hot", badgeType: "", image: "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=600&auto=format&fit=crop&q=80" },
+      { id: 19, name: "Peony Blossom EDP 30ml", category: "perfume", categoryLabel: "Nước hoa", price: 1250000, oldPrice: 1550000, rating: 4.8, reviews: 234, badge: "-19%", badgeType: "sale", image: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=600&auto=format&fit=crop&q=80" },
+      { id: 20, name: "Vanilla Bourbon Parfum", category: "perfume", categoryLabel: "Nước hoa", price: 2750000, oldPrice: 3200000, rating: 5.0, reviews: 112, badge: "-14%", badgeType: "sale", image: "https://images.unsplash.com/photo-1619994403073-2cec844b8e63?w=600&auto=format&fit=crop&q=80" },
+      { id: 21, name: "Citrus Bloom EDT 75ml", category: "perfume", categoryLabel: "Nước hoa", price: 1580000, oldPrice: null, rating: 4.7, reviews: 156, badge: "Mới", badgeType: "", image: "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=600&auto=format&fit=crop&q=80" },
+      { id: 22, name: "Oriental Oud EDP", category: "perfume", categoryLabel: "Nước hoa", price: 2950000, oldPrice: 3400000, rating: 5.0, reviews: 98, badge: "-13%", badgeType: "sale", image: "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=600&auto=format&fit=crop&q=80" }
+    ];
 
-      <div class="footer-col">
-        <h4>Hỗ trợ</h4>
-        <a href="#"><i class="fas fa-chevron-right"></i> Hướng dẫn chăm sóc</a>
-        <a href="#"><i class="fas fa-chevron-right"></i> Chính sách đổi trả</a>
-        <a href="#"><i class="fas fa-chevron-right"></i> Vận chuyển</a>
-        <a href="#"><i class="fas fa-chevron-right"></i> Câu hỏi thường gặp</a>
-      </div>
-
-      <div class="footer-col">
-        <h4>Liên hệ</h4>
-        <a href="#"><i class="fas fa-map-pin"></i> 123 Nguyễn Văn Cừ, Q.5</a>
-        <a href="#"><i class="fas fa-phone-alt"></i> 1900 6789</a>
-        <a href="#"><i class="fas fa-envelope"></i> hello@vuonxinh.vn</a>
-        <a href="#"><i class="fas fa-clock"></i> 8:00 - 21:00 hàng ngày</a>
-      </div>
-    </div>
-
-    <div class="copyright">
-      © 2025 <span>Vườn Xinh</span> – Cây cảnh & Thiên nhiên. Thiết kế bởi đam mê.
-    </div>
-  </div>
-</footer>
-
-<script>
-  // Hiệu ứng scroll nhẹ cho header
-  const header = document.querySelector('header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.style.top = '8px';
-    } else {
-      header.style.top = '16px';
+    /* =====================================================
+       HELPERS
+       ===================================================== */
+    function formatPrice(price) {
+      return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
     }
-  });
 
-  // Hiệu ứng thêm vào giỏ hàng
-  document.querySelectorAll('.btn-add').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      this.style.transform = 'scale(0.85) rotate(0deg)';
-      setTimeout(() => {
-        this.style.transform = '';
-      }, 200);
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
 
-      // Cập nhật badge
-      const badge = document.querySelector('.cart-badge');
-      if (badge) {
-        badge.textContent = parseInt(badge.textContent) + 1;
-        badge.style.transform = 'scale(1.4)';
-        setTimeout(() => badge.style.transform = '', 300);
-      }
+    function buildProductCard(product, index = 0) {
+      const oldPriceHtml = product.oldPrice ? `<span class="price-old">${formatPrice(product.oldPrice)}</span>` : '';
+      const stars = '★'.repeat(Math.floor(product.rating)) + (product.rating % 1 ? '☆' : '');
+      const badgeClass = product.badgeType === 'sale' ? 'product-badge sale' : 'product-badge';
+
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.style.animation = `fadeUp 0.6s ease ${index * 0.05}s forwards`;
+      card.style.opacity = '0';
+      card.innerHTML = `
+        <div class="product-image">
+          <span class="${badgeClass}">${product.badge}</span>
+          <div class="product-actions">
+            <button class="action-btn" title="Yêu thích"><i class="far fa-heart"></i></button>
+            <button class="action-btn" title="Xem nhanh"><i class="far fa-eye"></i></button>
+            <button class="action-btn" title="So sánh"><i class="fas fa-exchange-alt"></i></button>
+          </div>
+          <img src="${product.image}" alt="${product.name}" loading="lazy">
+        </div>
+        <div class="product-info">
+          <div class="product-cat">${product.categoryLabel}</div>
+          <h3 class="product-title">${product.name}</h3>
+          <div class="product-rating"><span class="stars">${stars}</span><span>(${product.reviews} đánh giá)</span></div>
+          <div class="product-price">
+            <span class="price-current">${formatPrice(product.price)}</span>
+            ${oldPriceHtml}
+          </div>
+          <button class="btn-cart" data-id="${product.id}"><i class="fas fa-shopping-bag"></i> Thêm vào giỏ</button>
+        </div>`;
+      return card;
+    }
+
+    /* =====================================================
+       RENDER HOME PRODUCTS (4 sản phẩm đầu)
+       ===================================================== */
+    const homeProductGrid = document.getElementById('homeProductGrid');
+    products.slice(0, 4).forEach((product, index) => {
+      homeProductGrid.appendChild(buildProductCard(product, index));
     });
-  });
 
-  // Hiệu ứng wishlist
-  document.querySelectorAll('.wishlist-btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      const icon = this.querySelector('i');
-      if (icon.classList.contains('far')) {
-        icon.classList.remove('far');
-        icon.classList.add('fas');
-        this.style.background = '#ffe0e0';
-        this.style.color = '#ee5253';
+    /* =====================================================
+       RENDER PRODUCTS PAGE
+       ===================================================== */
+    const productsGrid = document.getElementById('productsGrid');
+    const productCountEl = document.getElementById('productCount');
+    let currentFilter = 'all';
+    let currentSort = 'default';
+
+    function renderProductsPage() {
+      let filtered = currentFilter === 'all'
+        ? [...products]
+        : products.filter(p => p.category === currentFilter);
+
+      if (currentSort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+      else if (currentSort === 'price-desc') filtered.sort((a, b) => b.price - a.price);
+      else if (currentSort === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+
+      productCountEl.textContent = filtered.length;
+      productsGrid.innerHTML = '';
+      filtered.forEach((product, index) => {
+        productsGrid.appendChild(buildProductCard(product, index));
+      });
+    }
+    renderProductsPage();
+
+    /* =====================================================
+       FILTER BUTTONS
+       ===================================================== */
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentFilter = this.dataset.filter;
+        renderProductsPage();
+      });
+    });
+
+    /* =====================================================
+       SORT SELECT
+       ===================================================== */
+    document.getElementById('sortSelect').addEventListener('change', function () {
+      currentSort = this.value;
+      renderProductsPage();
+    });
+
+    /* =====================================================
+       CART SYSTEM
+       ===================================================== */
+    let cart = [];
+
+    const cartIcon = document.getElementById('cartIcon');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const cartBody = document.getElementById('cartBody');
+    const cartFooter = document.getElementById('cartFooter');
+    const cartCountLabel = document.getElementById('cartCountLabel');
+    const cartSubtotal = document.getElementById('cartSubtotal');
+    const cartTotal = document.getElementById('cartTotal');
+
+    function openCart() {
+      cartDrawer.classList.add('active');
+      cartOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+      cartDrawer.classList.remove('active');
+      cartOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeCart();
+    });
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += 1;
       } else {
-        icon.classList.remove('fas');
-        icon.classList.add('far');
-        this.style.background = '';
-        this.style.color = '';
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          categoryLabel: product.categoryLabel,
+          qty: 1
+        });
+      }
+
+      updateCartIcon();
+      cartIcon.classList.remove('bounce');
+      void cartIcon.offsetWidth;
+      cartIcon.classList.add('bounce');
+
+      renderCart();
+      showToast(`Đã thêm "${product.name}" vào giỏ!`);
+      setTimeout(() => openCart(), 200);
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCartIcon();
+      renderCart();
+      showToast('Đã xóa sản phẩm khỏi giỏ hàng');
+    }
+
+    function changeQty(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        removeFromCart(productId);
+        return;
+      }
+      updateCartIcon();
+      renderCart();
+    }
+
+    function updateCartIcon() {
+      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+      cartIcon.setAttribute('data-count', totalQty);
+      cartCountLabel.textContent = `${totalQty} sản phẩm`;
+    }
+
+    function calculateTotal() {
+      return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    }
+
+    function renderCart() {
+      if (cart.length === 0) {
+        cartBody.innerHTML = `
+          <div class="cart-empty">
+            <i class="fas fa-shopping-bag"></i>
+            <h4>Giỏ hàng trống</h4>
+            <p>Hãy khám phá và thêm sản phẩm yêu thích của bạn nhé!</p>
+            <button class="btn-luxury" onclick="closeCart(); navigateTo('products')" style="padding: 14px 32px; font-size: 0.7rem;">
+              Khám phá sản phẩm <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>`;
+        cartFooter.style.display = 'none';
+        return;
+      }
+
+      cartFooter.style.display = 'block';
+
+      cartBody.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div class="cart-item-image">
+            <img src="${item.image}" alt="${item.name}">
+          </div>
+          <div class="cart-item-info">
+            <div class="cart-item-cat">${item.categoryLabel}</div>
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${formatPrice(item.price)}</div>
+            <div class="cart-item-controls">
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty(${item.id}, -1)"><i class="fas fa-minus"></i></button>
+                <span class="qty-value">${item.qty}</span>
+                <button class="qty-btn" onclick="changeQty(${item.id}, 1)"><i class="fas fa-plus"></i></button>
+              </div>
+              <button class="cart-item-remove" onclick="removeFromCart(${item.id})" title="Xóa">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      const total = calculateTotal();
+      cartSubtotal.textContent = formatPrice(total);
+      cartTotal.textContent = formatPrice(total);
+    }
+
+    function checkout() {
+      if (cart.length === 0) return;
+      const total = calculateTotal();
+      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+
+      if (confirm(`Xác nhận đặt hàng?\n\n${totalQty} sản phẩm\nTổng cộng: ${formatPrice(total)}\n\nCảm ơn bạn đã mua sắm tại Nàng Thơ Beauty!`)) {
+        cart = [];
+        updateCartIcon();
+        renderCart();
+        closeCart();
+        showToast('Đặt hàng thành công! Cảm ơn bạn 💕');
+      }
+    }
+
+    cartIcon.addEventListener('click', openCart);
+
+    /* Event delegation cho nút thêm giỏ */
+    document.addEventListener('click', function (e) {
+      const cartBtn = e.target.closest('.btn-cart');
+      if (cartBtn) {
+        const id = parseInt(cartBtn.dataset.id);
+        addToCart(id);
       }
     });
-  });
-</script>
+
+    updateCartIcon();
+    renderCart();
+
+    /* =====================================================
+       NAVIGATION (SPA)
+       ===================================================== */
+    function navigateTo(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+
+      if (page === 'home') {
+        document.getElementById('page-home').classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (page === 'categories') {
+        document.getElementById('page-categories').classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (page === 'products') {
+        document.getElementById('page-products').classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (page === 'story') {
+        document.getElementById('page-home').classList.add('active');
+        setTimeout(() => document.getElementById('story').scrollIntoView({ behavior: 'smooth' }), 100);
+      } else if (page === 'contact') {
+        document.getElementById('page-home').classList.add('active');
+        setTimeout(() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }), 100);
+      }
+
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.toggle('active', a.dataset.page === page);
+      });
+    }
+
+    function navigateToCategory(category) {
+      navigateTo('products');
+      currentFilter = category;
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === category);
+      });
+      renderProductsPage();
+    }
+
+    /* =====================================================
+       SCROLL TOP
+       ===================================================== */
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', function () {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.style.padding = '14px 0';
+        header.style.boxShadow = '0 10px 40px rgba(183, 110, 121, 0.08)';
+      } else {
+        header.style.padding = '22px 0';
+        header.style.boxShadow = 'none';
+      }
+    });
+
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* =====================================================
+       INTERSECTION OBSERVER
+       ===================================================== */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'fadeUp 0.8s ease forwards';
+          entry.target.style.opacity = '0';
+          setTimeout(() => { entry.target.style.opacity = '1'; }, 50);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.category-card, .category-block, .cta-section, .newsletter').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 
 </body>
 </html>
